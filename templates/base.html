@@ -28,7 +28,9 @@
                     <nav class="pure-menu pure-menu-horizontal menu-local">
                         <ul class="pure-menu-list">
                             <li class="pure-menu-item"><a href="/packages" class="pure-menu-link">Packages</a></li>
+                            {% if contents %}
                             <li class="pure-menu-item"><a href="/contents" class="pure-menu-link">Contents</a></li>
+                            {% endif %}
                             {% if flagging %}
                                 <li class="pure-menu-item"><a href="/flagged" class="pure-menu-link">Flagged</a></li>
                             {% endif %}
@@ -36,11 +38,12 @@
                     </nav>
                     <nav class="pure-menu pure-menu-horizontal menu-external">
                         <ul class="pure-menu-list">
-                            <li class="pure-menu-item"><a href="{{ external_wiki }}" class="pure-menu-link">wiki</a>
-                            </li>
-                            <li class="pure-menu-item"><a href="{{ external_mirrors }}"
-                                                          class="pure-menu-link">mirrors</a>
-                            </li>
+                            {% if external_wiki %}
+                            <li class="pure-menu-item"><a href="{{ external_wiki }}" class="pure-menu-link">wiki</a></li>
+                            {% endif %}
+                            {% if external_mirrors %}
+                            <li class="pure-menu-item"><a href="{{ external_mirrors }}" class="pure-menu-link">mirrors</a></li>
+                            {% endif %}
                         </ul>
                     </nav>
                 </div>

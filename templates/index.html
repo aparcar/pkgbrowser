@@ -131,7 +131,7 @@
                                 </a>
                             </strong>
                         </td>
-                        <td class="url"><a href="{{ package.url }}">URL</a></td>
+                        <td class="url">{% if package.url %}<a href="{{ package.url }}">URL</a>{% endif %}</td>
                         <td class="license">{{ package.license }}</td>
                         <td class="branch">{{ form.branch }}</td>
                         <td class="repo">

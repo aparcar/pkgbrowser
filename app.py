@@ -30,6 +30,8 @@ def get_settings():
         "logo": config.get('branding', 'logo'),
         "favicon": config.get('branding', 'favicon'),
         "flagging": config.get('settings', 'flagging') == 'yes',
+        "buildlogs": config.get('settings', 'buildlogs') == 'yes',
+        "contents": config.get('settings', 'contents') == 'yes',
         "external_wiki": config.get('external', 'wiki'),
         "external_mirrors": config.get('external', 'mirrors'),
     }
