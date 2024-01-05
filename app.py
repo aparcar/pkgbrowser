@@ -32,6 +32,7 @@ def get_settings():
         "flagging": config.get('settings', 'flagging') == 'yes',
         "buildlogs": config.get('settings', 'buildlogs') == 'yes',
         "contents": config.get('settings', 'contents') == 'yes',
+        "origin_packages": config.get('settings', 'origin_packages', fallback="yes") == 'yes',
         "external_wiki": config.get('external', 'wiki'),
         "external_mirrors": config.get('external', 'mirrors'),
     }

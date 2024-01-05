@@ -62,6 +62,7 @@
                                 <th class="header">Installed size</th>
                                 <td>{{ pkg.installed_size }}</td>
                             </tr>
+                            {% if origin_packages %}
                             <tr>
                                 <th class="header">Origin</th>
                                 <td>
@@ -69,6 +70,7 @@
                                         {{ pkg.origin }}
                                     </a></td>
                             </tr>
+                            {% endif %}
                             {% if install_if %}
                                 <tr>
                                     <th class="header">Install if</th>
