@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "pkgbrowser"
+version = "0.1.0"
+description = ""
+authors = ["Paul Spooren <mail@aparcar.org>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+Flask = "^3.0.0"
+requests = "^2.31.0"
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.12.1"
+flake8 = "^7.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
