@@ -75,6 +75,9 @@ def get_filter(name, arch, repo, maintainer=None, origin=None, file=None, path=N
     }
     glob_fields = ["packages.name", "files.file", "files.path"]
 
+    if filter_fields["packages.name"] and not filter_fields["packages.name"].endswith("*"):
+        filter_fields["packages.name"] += "*"
+
     where = []
     args = []
     for key in filter_fields:
