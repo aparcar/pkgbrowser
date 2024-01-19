@@ -205,6 +205,23 @@
                             </ul>
                         </div>
                     </details>
+                    <details>
+                        <summary>Architectures ({{ pkg.archs | length }})</summary>
+                        <div class="pure-menu custom-restricted-width">
+                            <ul class="pure-menu-list">
+                                {% for arch in pkg.archs %}
+                                    <li class="pure-menu-item">
+                                        <a class="pure-menu-link"
+                                            href="{{ url_for('package', branch=branch, repo=pkg.repo, arch=arch, name=pkg.name) }}">
+                                         {{ arch }}
+                                     </a>
+                                    </li>
+                                {% else %}
+                                    <li class="pure-menu-item"><a class="pure-menu-link" href="{{ path }}">None</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </details>
                 </div>
             </div>
         </div>

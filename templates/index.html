@@ -109,7 +109,7 @@
                     <th>Licence</th>
                     <th>Branch</th>
                     <th>Repository</th>
-                    <th>Architecture</th>
+                    <th>Architectures</th>
                     <th>Maintainer</th>
                     <th>Build date</th>
                 </tr>
@@ -141,10 +141,9 @@
                             </a>
                         </td>
                         <td class="arch">
-                            <a class="hint--right" aria-label="Filter packages in the mips64 architecture"
-                               href="?name=&branch={{ form.branch }}&repo=&arch={{ package.arch }}&maintainer=">
-                                {{ package.arch }}
-                            </a>
+                            <div class="cut-text">
+                                {{ package.archs }}
+                            </div>
                         </td>
                         <td class="maintainer">
                             <a class="hint--right" aria-label="Filter packages maintained by {{ package.mname }}"

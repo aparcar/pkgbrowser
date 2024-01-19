@@ -134,7 +134,9 @@ def get_packages(branch, offset, name=None, arch=None, repo=None, maintainer=Non
     sql = """
     SELECT packages.*, datetime(packages.build_time, 'unixepoch') as build_time,
         maintainer.name as mname, maintainer.email as memail,
-        datetime(flagged.created, 'unixepoch') as flagged
+        datetime(flagged.created, 'unixepoch') as flagged,
+        group_concat(packages.arch) as archs, packages.arch
+
     FROM packages
     LEFT JOIN maintainer ON packages.maintainer = maintainer.id
     LEFT JOIN flagged ON packages.origin = flagged.origin
@@ -142,6 +144,7 @@ def get_packages(branch, offset, name=None, arch=None, repo=None, maintainer=Non
         AND packages.repo = flagged.repo
     {}
     {}
+    GROUP BY packages.name, packages.version
     ORDER BY packages.build_time DESC
     LIMIT 50 OFFSET ?
     """.format(pjoin, where)
@@ -178,7 +181,22 @@ def get_package(branch, repo, arch, name):
     alldata = cur.fetchall()
     if len(alldata) == 0:
         return None
+
+    sql = """
+        SELECT packages.arch as arch
+        FROM packages
+        WHERE packages.repo = ?
+            AND packages.name = ?
+            AND packages.version = ?
+    """
+
+    cur.execute(sql, [repo, name, alldata[0][2]])
+    cur.row_factory = lambda cursor, row: row[0]
+    archs = sorted(cur.fetchall())
+    cur.row_factory = None
+
     result = [dict(zip(fields, row)) for row in alldata]
+    result[0]['archs'] = archs
     return result[0]
 
 
