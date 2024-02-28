@@ -125,10 +125,16 @@
                         </td>
                         <td class="version">
                             <strong>
+                                {% if flagging %}
                                 <a class="hint--right text-success" aria-label="Flag this package out of date"
                                    href="TODO">
                                     {{ package.version }}
                                 </a>
+                                {% else %}
+                                <span class="text-success">
+                                    {{ package.version }}
+                                </span>
+                                {% endif %}
                             </strong>
                         </td>
                         <td class="url">{% if package.url %}<a href="{{ package.url }}">URL</a>{% endif %}</td>
