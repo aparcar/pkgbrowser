@@ -6,7 +6,6 @@ favicon = postmarketos-favicon.ico
 [repository]
 url = https://mirror.postmarketos.org/postmarketos
 branches = master
-arches = aarch64,armv7,armhf,x86_64,x86
 repos = postmarketos
 
 default-branch = master

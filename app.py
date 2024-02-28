@@ -16,9 +16,12 @@ def get_branches():
     return config.get('repository', 'branches').split(',')
 
 
-def get_arches():
-    return config.get('repository', 'arches').split(',')
-
+def get_arches(branch):
+    db = get_db()
+    cur = db[branch].cursor()
+    cur.execute("SELECT DISTINCT arch FROM packages")
+    result = cur.fetchall()
+    return map(lambda x: x[0], result)
 
 def get_repos():
     return config.get('repository', 'repos').split(',')
@@ -394,7 +397,7 @@ def index():
 @app.route('/packages')
 def packages():
     name = request.args.get('name')
-    branch = request.args.get('branch')
+    branch = request.args.get('branch') or config.get("repository", "default-branch")
     repo = request.args.get('repo')
     arch = request.args.get('arch')
     maintainer = request.args.get('maintainer')
@@ -404,7 +407,7 @@ def packages():
 
     form = {
         "name": name if name is not None else "",
-        "branch": branch if branch is not None else config.get('repository', 'default-branch'),
+        "branch": branch,
         "repo": repo if repo is not None else "",
         "arch": arch if arch is not None else "",
         "maintainer": maintainer if maintainer is not None else "",
@@ -413,7 +416,7 @@ def packages():
     }
 
     branches = get_branches()
-    arches = get_arches()
+    arches = get_arches(branch)
     repos = get_repos()
     maintainers = get_maintainers(branch=form['branch'])
 
@@ -453,7 +456,7 @@ def contents():
     file = request.args.get('file')
     path = request.args.get('path')
     name = request.args.get('name')
-    branch = request.args.get('branch')
+    branch = request.args.get('branch') or config.get('repository', 'default-branch')
     repo = request.args.get('repo')
     arch = request.args.get('arch')
 
@@ -463,14 +466,14 @@ def contents():
         "file": file if file is not None else "",
         "path": path if path is not None else "",
         "name": name if name is not None else "",
-        "branch": branch if branch is not None else config.get('repository', 'default-branch'),
+        "branch": branch,
         "repo": repo if repo is not None else config.get('repository', 'default-repo'),
         "arch": arch if arch is not None else "",
         "page": int(page) if page is not None else 1
     }
 
     branches = get_branches()
-    arches = get_arches()
+    arches = get_arches(branch)
     repos = get_repos()
 
     offset = (form['page'] - 1) * 50
