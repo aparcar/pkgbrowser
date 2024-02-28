@@ -27,7 +27,7 @@
                             </div>
                             <div class="pure-u-1 pure-u-md-2-24 form-field">
                                 <select class="pure-input-1" name="branch" id="branch">
-                                    <option value="" disabled>Branch</option>
+                                    <option value="">Branch</option>
                                     {% for branch in branches %}
                                         <option{% if branch == form.branch %} selected{% endif %}>
                                             {{ branch }}
@@ -37,7 +37,7 @@
                             </div>
                             <div class="pure-u-1 pure-u-md-2-24 form-field">
                                 <select class="pure-input-1" name="repo" id="repo">
-                                    <option value="" disabled selected>Repository</option>
+                                    <option value="" selected>Repository</option>
                                     {% for repo in repos %}
                                         <option{% if repo == form.repo %} selected{% endif %}>
                                             {{ repo }}
@@ -47,7 +47,7 @@
                             </div>
                             <div class="pure-u-1 pure-u-md-2-24 form-field">
                                 <select class="pure-input-1" name="arch" id="arch">
-                                    <option value="" disabled selected>Arch</option>
+                                    <option value="" selected>Arch</option>
                                     {% for arch in arches %}
                                         <option{% if arch == form.arch %} selected{% endif %}>
                                             {{ arch }}
